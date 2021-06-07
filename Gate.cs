@@ -26,16 +26,22 @@ namespace Learn.AsyncRequestReply
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            name ??= data?.name;
 
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+            var body = new MessageBody{
+                Id = Guid.NewGuid().ToString(),
+                Name = name
+            };
+            string bodyAsJson = JsonConvert.SerializeObject(body);
 
+            await OutMessage.AddAsync(new Message(Encoding.UTF8.GetBytes(bodyAsJson)));
 
-            await OutMessage.AddAsync(new Message(Encoding.UTF8.GetBytes(responseMessage)));
-
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult($"message '{bodyAsJson}' published");
         }
+    }
+
+    public class MessageBody {
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }
