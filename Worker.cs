@@ -22,12 +22,11 @@ namespace Learn.AsyncRequestReply
             var body = JsonConvert.DeserializeObject<MessageBody>(System.Text.Encoding.UTF8.GetString(myQueueItem.Body));
             var blob = blobContainer.GetBlockBlobReference($"{body.Id}");
             log.LogInformation($"BODY ID {body.Id} name {body.Name}");
-            /*string responseMessage = string.IsNullOrEmpty(body.Name)
-                ? "The worker function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {body.Name}. This HTTP triggered function executed successfully.";
-            await blob.UploadTextAsync(responseMessage);*/
 
-            await blob.UploadFromByteArrayAsync(myQueueItem.Body, 0, myQueueItem.Body.Length);
+            string responseMessage = string.IsNullOrEmpty(body.Name)
+                ? "The worker function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                : $"Hello, {body.Name}. The Async Request Reply pattern worked as expected.";
+            await blob.UploadTextAsync(responseMessage);
         }
     }
 }
