@@ -9,7 +9,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Learn.AsyncRequestReply
+namespace AsyncRequestReply
 {
     public static class Worker
     {

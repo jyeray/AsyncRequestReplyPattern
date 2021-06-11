@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Azure.Storage.Blobs;
 
-namespace Learn.AsyncRequestReply
+namespace AsyncRequestReply
 {
     public static class Status
     {

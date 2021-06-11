@@ -10,7 +10,7 @@ using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace Learn.AsyncRequestReply
+namespace AsyncRequestReply
 {
     public static class Gate
     {
