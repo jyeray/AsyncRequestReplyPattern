@@ -28,8 +28,6 @@ namespace AsyncRequestReply
                 ? "The worker function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {body.Name}. The Async Request Reply pattern worked as expected.";
 
-            //var blob = blobContainer.GetBlockBlobReference($"{body.Id}");
-            //await blobClient.UploadTextAsync(responseMessage);
             var blobClient = blobContainer.GetBlobClient(body.Id);
             await blobClient.UploadAsync(new BinaryData(Encoding.UTF8.GetBytes(responseMessage)));
         }
