@@ -2,11 +2,9 @@
 
 This is a simple project that implement an Asynchronous Request Reply Pattern example using azure functions. This project is very similar to the [Microsoft's documentation example](https://docs.microsoft.com/en-us/azure/architecture/patterns/async-request-reply#example)
 
----
 ## Disclaimer
 This repository was created for learning purposes. **The code written in this repository is not production ready!** This is just a little repository made in a few hours.
 
----
 ## How to use it
 
 ### Azure setup
@@ -27,5 +25,5 @@ Go to the project's folder, run it, and follow the instructions:
 
 ```sh
 cd AsyncRequestReply.Client
-dotnet run --gateUrl=<<The url to the Gate function here, including the authentication code>>
+dotnet run --gateUrl=<< The url to the Gate function here, including the authentication code >>
 ```
