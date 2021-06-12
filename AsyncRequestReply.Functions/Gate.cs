@@ -28,15 +28,18 @@ namespace AsyncRequestReply
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name ??= data?.name;
 
-            var body = new MessageBody{
+            var messageBody = new MessageBody{
                 Id = Guid.NewGuid().ToString(),
                 Name = name
             };
-            string bodyAsJson = JsonConvert.SerializeObject(body);
+            string bodyAsJson = JsonConvert.SerializeObject(messageBody);
 
             await OutMessage.AddAsync(new Message(Encoding.UTF8.GetBytes(bodyAsJson)));
 
-            return new OkObjectResult($"message '{bodyAsJson}' published");
+            var statusFunctionKey = Environment.GetEnvironmentVariable("StatusFunctionKey");
+            var statusFunctionHost = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
+            string statusUrl = $"https://{statusFunctionHost}/api/Status/{messageBody.Id}?code={statusFunctionKey}";
+            return new AcceptedResult(statusUrl, "Request accepted");
         }
     }
 }
