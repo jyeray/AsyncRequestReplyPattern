@@ -38,7 +38,7 @@ namespace AsyncRequestReply
 
             var statusFunctionKey = Environment.GetEnvironmentVariable("StatusFunctionKey");
             var statusFunctionHost = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
-            string statusUrl = $"https://{statusFunctionHost}/api/Status/{messageBody.Id}?code={statusFunctionKey}";
+            string statusUrl = $"https://{statusFunctionHost}/api/Status?id={messageBody.Id}&code={statusFunctionKey}";
             return new AcceptedResult(statusUrl, "Request accepted");
         }
     }
